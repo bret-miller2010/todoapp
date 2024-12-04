@@ -63,7 +63,7 @@ export const LeftArrow = () => {
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke="currentColor"
+      stroke="black"
       className="size-10"
     >
       <path
@@ -82,7 +82,7 @@ export const RightArrow = () => {
       fill="none"
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke="currentColor"
+      stroke="black"
       className="size-10"
     >
       <path
