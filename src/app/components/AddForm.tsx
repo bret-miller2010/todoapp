@@ -10,9 +10,12 @@ const AddForm = ({ display, closeMenu }: AddFormProps) => {
   const [newTodo, setNewTodo] = useState<Todo>({} as Todo);
 
   const updateTodo = (event: EventHandlerType) => {
+    const key = event.currentTarget.name;
+    const value = event.currentTarget.value;
+
     setNewTodo({
       ...newTodo,
-      [event.currentTarget.name]: event.currentTarget.value,
+      [key]: value,
     });
   };
 
@@ -55,7 +58,6 @@ const AddForm = ({ display, closeMenu }: AddFormProps) => {
           ))}
         </div>
       </div>
-
       <div className="flex flex-col items-center space-y-2">
         <div>Select Priority</div>
         <div className="flex space-x-5">

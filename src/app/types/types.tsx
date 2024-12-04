@@ -1,7 +1,6 @@
 export type AddFormProps = {
   closeMenu: () => void;
   display: boolean;
-  handleSubmit?: React.FormEventHandler<HTMLFormElement>;
 };
 
 export type Todo = {

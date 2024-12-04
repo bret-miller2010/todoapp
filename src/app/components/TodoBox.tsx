@@ -17,11 +17,15 @@ export const TodoBox = ({ todo }: { todo: Todo }) => {
     });
   };
 
+  const borderColor = (check: boolean) => {
+    return check ? "border-green-500 outline-green-500" : "border-black outline-black";
+  }
+
   const test = () => {
     console.log("test");
   };
   return (
-    <div className="flex w-full items-center justify-between rounded-xl border-2 border-black bg-white p-1 shadow-inner shadow-xl hover:outline-double">
+    <div className={`flex w-full items-center justify-between rounded-xl border-2 ${borderColor(todo.completed)} bg-white p-1 shadow-inner shadow-xl hover:outline-double`}>
       <div>{todo.task}</div>
       <div className="flex flex-col items-center justify-center">
         <div>{todo.complexity}</div>
