@@ -12,7 +12,6 @@ export const ToDoProvider = ({ children }) => {
   const [todos, setTodos] = useState([]);
 
   const addTodo = (todo) => {
-    console.log(todo);
     setTodos([...todos, todo]);
   };
 
@@ -20,8 +19,15 @@ export const ToDoProvider = ({ children }) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  const updateTodo = (id, updatedTodo) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? updatedTodo : todo,
+    );
+    setTodos(updatedTodos);
+  };
+
   return (
-    <TodoContext.Provider value={{ todos, addTodo, removeTodo }}>
+    <TodoContext.Provider value={{ todos, addTodo, removeTodo, updateTodo }}>
       {children}
     </TodoContext.Provider>
   );

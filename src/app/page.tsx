@@ -16,7 +16,7 @@ export default function Home() {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <div className="flex h-[800px] w-[600px] flex-col items-center space-y-10 bg-gray-500 p-10">
+      <div className="flex h-[800px] w-[600px] flex-col items-center space-y-10 rounded-xl border-2 border-black bg-gray-200 p-10 shadow-inner shadow-xl shadow-gray-500/50">
         <input className="pl-2" placeholder="Search tasks..." type="text" />
         <div className="flex w-3/4 items-center justify-around">
           <button
@@ -35,9 +35,8 @@ export default function Home() {
           closeMenu={() => setDisplayAddForm(false)}
           display={displayAddForm}
         />
-        <div>
-          <div>The Todos</div>
-          <div className="space-y-2">
+        <div className="flex w-full flex-col items-center justify-center">
+          <div className="flex w-full flex-col items-center justify-center space-y-2">
             {todos.map((todo: Todo, index: number) => (
               <TodoBox key={index} todo={todo} />
             ))}

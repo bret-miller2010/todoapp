@@ -8,20 +8,6 @@ import { uid } from "uid";
 const AddForm = ({ display, closeMenu }: AddFormProps) => {
   const { addTodo } = useTodo();
   const [newTodo, setNewTodo] = useState<Todo>({} as Todo);
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   const updateTodo = (event: EventHandlerType) => {
     setNewTodo({
@@ -32,11 +18,12 @@ const AddForm = ({ display, closeMenu }: AddFormProps) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    addTodo({ ...newTodo, id: uid() });
+    addTodo({ ...newTodo, id: uid(), completed: false });
     closeMenu();
   };
 
   if (!display) return null;
+
   return (
     <div className="top-17 fixed flex flex-col items-center justify-center space-y-5 bg-red-500 px-20 py-20">
       <input
@@ -47,38 +34,12 @@ const AddForm = ({ display, closeMenu }: AddFormProps) => {
         placeholder="Add a new todo"
       />
       <div className="flex w-3/4 items-center justify-around">
-        <select
-          className="w-40 border-2 border-black"
-          defaultValue={"default"}
-          name="month"
-          id=""
+        <input
+          className="p-1"
+          type="date"
           onChange={updateTodo}
-        >
-          <option disabled value="default">
-            Select Month
-          </option>
-          {months.map((month, index) => (
-            <option key={index} value={month}>
-              {month}
-            </option>
-          ))}
-        </select>
-        <select
-          className="w-40 border-2 border-black"
-          onChange={updateTodo}
-          name="day"
-          id=""
-          defaultValue={"default"}
-        >
-          <option disabled value="default">
-            Select Day
-          </option>
-          {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
-            <option key={day} value={day}>
-              {day}
-            </option>
-          ))}
-        </select>
+          name={"due_date"}
+        />
       </div>
       <div className="flex flex-col items-center space-y-2">
         <div>Select Complexity</div>
