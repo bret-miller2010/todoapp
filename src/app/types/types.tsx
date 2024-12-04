@@ -1,16 +1,17 @@
 export type AddFormProps = {
   closeMenu: () => void;
   display: boolean;
+  id: string | undefined;
 };
 
 export type Todo = {
-  id: string;
-  task: string;
-  due_date: string;
-  complexity: number;
-  description: string;
-  priority: number;
-  completed: boolean;
+  id: "";
+  task: "";
+  due_date: "";
+  complexity: string;
+  description: "";
+  priority: string;
+  completed: false;
 };
 
 export type EventHandlerType =

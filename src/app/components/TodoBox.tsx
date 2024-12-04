@@ -3,7 +3,13 @@ import { Todo } from "../types/types";
 import { EditIcon, CheckIcon, TrashIcon } from "../icons/svg.jsx";
 import { useTodo } from "../context/TodoContext";
 
-export const TodoBox = ({ todo }: { todo: Todo }) => {
+export const TodoBox = ({
+  todo,
+  edit,
+}: {
+  todo: Todo;
+  edit: React.MouseEventHandler<HTMLButtonElement>;
+}) => {
   const { removeTodo, updateTodo } = useTodo();
 
   const handleRemove = () => {
@@ -18,14 +24,15 @@ export const TodoBox = ({ todo }: { todo: Todo }) => {
   };
 
   const borderColor = (check: boolean) => {
-    return check ? "border-green-500 outline-green-500" : "border-black outline-black";
-  }
-
-  const test = () => {
-    console.log("test");
+    return check
+      ? "border-green-500 outline-green-500"
+      : "border-black outline-black";
   };
+
   return (
-    <div className={`flex w-full items-center justify-between rounded-xl border-2 ${borderColor(todo.completed)} bg-white p-1 shadow-inner shadow-xl hover:outline-double`}>
+    <div
+      className={`flex w-full items-center justify-between rounded-xl border-2 ${borderColor(todo.completed)} bg-white p-1 shadow-inner shadow-xl hover:outline-double`}
+    >
       <div>{todo.task}</div>
       <div className="flex flex-col items-center justify-center">
         <div>{todo.complexity}</div>
@@ -40,7 +47,7 @@ export const TodoBox = ({ todo }: { todo: Todo }) => {
           <button onClick={handleRemove}>
             <TrashIcon />
           </button>
-          <button onClick={test}>
+          <button value={todo.id} onClick={edit}>
             <EditIcon />
           </button>
         </div>
