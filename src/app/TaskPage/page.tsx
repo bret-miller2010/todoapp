@@ -13,7 +13,6 @@ const TaskPage = () => {
 
   const editTask = (value: React.MouseEvent<HTMLButtonElement>) => {
     const idOfTodo = value.currentTarget.value;
-    // const todo = todos.find((todo: Todo) => todo.id === idOfTodo);
     setTaskID(idOfTodo);
     setDisplayAddForm(true);
   };
@@ -54,8 +53,8 @@ const TaskPage = () => {
           </div>
           <AddForm closeMenu={closeMenu} display={displayAddForm} id={taskID} />
         </div>
-        <div className="flex w-full flex-col items-center justify-center">
-          <div className="flex w-full flex-col items-center justify-center space-y-2">
+        <div className="h-full w-full flex-col items-center">
+          <div className="grid grid-cols-3 gap-x-5 gap-y-10 h-full w-full place-content-start">
             {todos.map((todo: Todo, index: number) => (
               <TodoBox key={index} todo={todo} edit={editTask} />
             ))}

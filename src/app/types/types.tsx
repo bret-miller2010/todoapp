@@ -5,13 +5,14 @@ export type AddFormProps = {
 };
 
 export type Todo = {
-  id: "";
-  task: "";
-  due_date: "";
+  id: string;
+  task: string;
+  due_date: string;
   complexity: string;
-  description: "";
+  description: string;
   priority: string;
   completed: false;
+  completed_date?: string;
 };
 
 export type EventHandlerType =

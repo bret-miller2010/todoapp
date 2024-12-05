@@ -12,7 +12,6 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
   const updateCurrentTodo = (event: EventHandlerType) => {
     const key = event.currentTarget.name;
     const value = event.currentTarget.value;
-
     setNewTodo({
       ...newTodo,
       [key]: value,
@@ -54,7 +53,6 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
     selected: string;
     type: string;
   }) => {
-    console.log(typeof selected);
     return (
       <div className="flex space-x-5">
         {Array.from({ length: 10 }, (_, i) => i + 1).map((_, index) => (
@@ -80,10 +78,10 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
   if (!display) return null;
 
   return (
-    <div className="top-17 fixed flex flex-col items-center justify-center space-y-5 bg-red-500 px-20 py-20">
+    <div className="fixed right-[850px] flex flex-col items-center justify-center space-y-5 rounded-2xl border-2 border-black bg-gray-500 px-12 py-16">
       <input
         onChange={updateCurrentTodo}
-        className="border-2 border-black pl-2"
+        className="rounded-md border-2 border-black pl-2"
         name={"task"}
         type="text"
         value={newTodo.task || ""}
@@ -91,7 +89,7 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
       />
       <div className="flex w-3/4 items-center justify-around">
         <input
-          className="p-1"
+          className="rounded-md p-1"
           type="date"
           value={newTodo.due_date || ""}
           onChange={updateCurrentTodo}
@@ -110,7 +108,7 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
         <RadioButtonSelection selected={newTodo.priority} type={"priority"} />
       </div>
       <textarea
-        className="border-2 border-black p-1"
+        className="rounded-md border-2 border-black p-1"
         placeholder="Enter information about the task you wish to add..."
         name="description"
         onChange={updateCurrentTodo}
@@ -121,9 +119,13 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
       ></textarea>
       <div className="flex space-x-16">
         <form onSubmit={handleSubmit}>
-          <button type="submit">Submit</button>
+          <button className="h-8 w-36 rounded-md bg-white" type="submit">
+            Submit
+          </button>
         </form>
-        <button onClick={handleClose}>Cancel</button>
+        <button className="h-8 w-36 rounded-md bg-white" onClick={handleClose}>
+          Cancel
+        </button>
       </div>
     </div>
   );

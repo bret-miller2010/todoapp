@@ -20,6 +20,7 @@ export const TodoBox = ({
     updateTodo(todo.id, {
       ...todo,
       completed: !todo.completed,
+      completed_date: todo.completed ? undefined : new Date().toISOString(),
     });
   };
 
@@ -31,7 +32,7 @@ export const TodoBox = ({
 
   return (
     <div
-      className={`flex w-full items-center justify-between rounded-xl border-2 ${borderColor(todo.completed)} bg-white p-1 shadow-inner shadow-xl hover:outline-double`}
+      className={`flex h-[100px] w-[300px] items-center justify-between rounded-xl border-2 ${borderColor(todo.completed)} bg-white p-1 shadow-xl hover:outline-double duration-500 hover:scale-110`}
     >
       <div>{todo.task}</div>
       <div className="flex flex-col items-center justify-center">
