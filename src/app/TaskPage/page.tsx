@@ -6,8 +6,8 @@ import AddForm from "../components/AddForm";
 import { TodoBox } from "../components/TodoBox";
 
 const TaskPage = () => {
-  const { todos, addTodo, removeTodo } = useTodo();
-  const [filteredValue, setFilteredValue] = useState();
+  const { todos } = useTodo();
+  const [filteredValue, setFilteredValue] = useState("");
   const [displayAddForm, setDisplayAddForm] = useState(false);
   const [taskID, setTaskID] = useState<string>();
 
@@ -19,6 +19,10 @@ const TaskPage = () => {
 
   const showAddForm = () => {
     setDisplayAddForm(!displayAddForm);
+  };
+
+  const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFilteredValue(event.target.value);
   };
 
   const closeMenu = () => {
@@ -34,6 +38,8 @@ const TaskPage = () => {
             className="border-2 border-black pl-2"
             placeholder="Search tasks..."
             type="text"
+            value={filteredValue}
+            onChange={handleFilter}
           />
           <div className="flex w-3/4 items-center justify-around">
             <button
@@ -54,10 +60,12 @@ const TaskPage = () => {
           <AddForm closeMenu={closeMenu} display={displayAddForm} id={taskID} />
         </div>
         <div className="h-full w-full flex-col items-center">
-          <div className="grid grid-cols-3 gap-x-5 gap-y-10 h-full w-full place-content-start">
-            {todos.map((todo: Todo, index: number) => (
-              <TodoBox key={index} todo={todo} edit={editTask} />
-            ))}
+          <div className="grid h-full w-full grid-cols-3 place-content-start gap-x-5 gap-y-10">
+            {todos
+              .filter((todo: Todo) => todo.task.includes(filteredValue))
+              .map((todo: Todo, index: number) => (
+                <TodoBox key={index} todo={todo} edit={editTask} />
+              ))}
           </div>
         </div>
       </div>
