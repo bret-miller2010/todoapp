@@ -28,12 +28,14 @@ export default function Home() {
   };
 
   const dueWithinWeek = () => {
-    const todosDueWithinWeek = todos.filter((todo: Todo) => {
+    const removeCompleted = todos.filter((todo: Todo) => !todo.completed);
+    const todosDueWithinWeek = removeCompleted.filter((todo: Todo) => {
       const dueDate = new Date(todo.due_date);
       const currentDate = new Date();
-      const timeDiff = Math.abs(currentDate.getTime() - dueDate.getTime());
+      const timeDiff = dueDate.getTime() - currentDate.getTime();
       const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-      return diffDays < 7;
+      console.log(todo.task, diffDays);
+      return diffDays > 0 && diffDays < 7;
     });
 
     return todosDueWithinWeek.length;
@@ -86,9 +88,14 @@ export default function Home() {
   };
 
   const getHighestPriority = () => {
-    if (todos.length === 0) {
-      return "Nothing to do!";
+    //If no todos or all are completed, return nothing to do
+    if (
+      todos.length === 0 ||
+      todos.filter((todo: Todo) => todo.completed === false).length === 0
+    ) {
+      return "No priority tasks!";
     }
+
     const priority = todos.reduce((prev: Todo, current: Todo) =>
       prev.priority > current.priority ? prev : current,
     );
@@ -103,26 +110,31 @@ export default function Home() {
   const getActiveTasks = () => {
     const activeTasks = todos.filter((todo: Todo) => !todo.completed);
     return activeTasks.length;
-  }
+  };
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-500">
       <div className="h-[1000px] w-[1400px] space-y-10 rounded-xl border-2 border-black bg-gray-200 p-5 shadow-xl shadow-gray-500/50">
-        <h1 className="mt-10 w-full text-center text-3xl">Welcome!</h1>
+        <h1 className="mt-10 w-full text-center text-3xl">
+          Snapshot information of current list
+        </h1>
         <div className="grid grid-cols-3 place-items-center gap-20 py-16">
-          <div className="flex h-[250px] w-[300px] items-center justify-center border-2 border-black bg-white">
-            Total Number of Tasks: {getActiveTasks()}
+          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white drop-shadow-2xl">
+            <p>
+              Total Number of <span className="underline">active</span> tasks
+            </p>
+            <p>{getActiveTasks()}</p>
           </div>
-          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center space-y-5 border-2 border-black bg-white">
+          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center space-y-5 border-2 border-black bg-white drop-shadow-2xl">
             <span className="text-[40px] font-black">PRIORITY</span>
-            <div className="text-center text-[30px] font-black">
+            <div className="text-center text-[20px]">
               {getHighestPriority()}
             </div>
           </div>
-          <div className="flex h-[250px] w-[300px] items-center justify-center border-2 border-black bg-white">
+          <div className="flex h-[250px] w-[300px] items-center justify-center border-2 border-black bg-white drop-shadow-2xl">
             {dueWithinWeek()} task(s) due within the next week!
           </div>
-          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white">
+          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white drop-shadow-2xl">
             <div>
               {getOverdueTasks() !== 0 ? (
                 getOverdueTasks()
@@ -136,11 +148,13 @@ export default function Home() {
               {getOldestTask()} {getLongestOverdueTime()}
             </div>
           </div>
-          <div className="flex h-[250px] w-[300px] items-center justify-center border-2 border-black bg-white">
-            <div>{getTotalCompletd()} total tasks completed.</div>
+          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white drop-shadow-2xl">
+            <p>Total Completed</p>
+            <p>{getTotalCompletd()}</p>
           </div>
-          <div className="h-[250px] w-[300px] border-2 border-black bg-white">
-            Most recent completed task: {getRecentlyCompleted()}
+          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white drop-shadow-2xl">
+            <p> Lasted Completed</p>
+            <p>{getRecentlyCompleted()}</p>
           </div>
         </div>
       </div>
