@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useTodo } from "./context/TodoContext";
 import { Todo } from "./types/types";
 
@@ -49,7 +50,7 @@ export default function Home() {
       return dueDate < currentDate;
     });
 
-    if(overdueTodos.length === 0) {
+    if (overdueTodos.length === 0) {
       return null;
     }
 
@@ -94,11 +95,15 @@ export default function Home() {
     return priority.task;
   };
 
-  const getCompletedTasks = () => {
+  const getTotalCompletd = () => {
     const completedTodos = todos.filter((todo: Todo) => todo.completed);
-
     return completedTodos.length;
   };
+
+  const getActiveTasks = () => {
+    const activeTasks = todos.filter((todo: Todo) => !todo.completed);
+    return activeTasks.length;
+  }
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-500">
@@ -106,7 +111,7 @@ export default function Home() {
         <h1 className="mt-10 w-full text-center text-3xl">Welcome!</h1>
         <div className="grid grid-cols-3 place-items-center gap-20 py-16">
           <div className="flex h-[250px] w-[300px] items-center justify-center border-2 border-black bg-white">
-            Total Number of Tasks: {todos.length}
+            Total Number of Tasks: {getActiveTasks()}
           </div>
           <div className="flex h-[250px] w-[300px] flex-col items-center justify-center space-y-5 border-2 border-black bg-white">
             <span className="text-[40px] font-black">PRIORITY</span>
@@ -115,7 +120,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex h-[250px] w-[300px] items-center justify-center border-2 border-black bg-white">
-            {dueWithinWeek()} tasks due within the next week!
+            {dueWithinWeek()} task(s) due within the next week!
           </div>
           <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white">
             <div>
@@ -124,13 +129,15 @@ export default function Home() {
               ) : (
                 <span className="font-black underline">NO</span>
               )}{" "}
-              <span> overdue task(s)!</span>
+              <span> overdue task(s)</span>
             </div>
 
-            <div>{getOldestTask()} {getLongestOverdueTime()}</div>
+            <div>
+              {getOldestTask()} {getLongestOverdueTime()}
+            </div>
           </div>
           <div className="flex h-[250px] w-[300px] items-center justify-center border-2 border-black bg-white">
-            <div>{getCompletedTasks()} total tasks completed.</div>
+            <div>{getTotalCompletd()} total tasks completed.</div>
           </div>
           <div className="h-[250px] w-[300px] border-2 border-black bg-white">
             Most recent completed task: {getRecentlyCompleted()}

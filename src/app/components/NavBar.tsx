@@ -7,6 +7,10 @@ import Link from "next/link";
 export default function NavBar() {
   const [collapsed, setCollapsed] = useState(false);
 
+  const handleClick = () => {
+    setCollapsed(!collapsed);
+  }
+
   const hideDisplay = (value: boolean) => {
     return value ? "-left-[282px]" : "left-0";
   };
@@ -30,13 +34,13 @@ export default function NavBar() {
             Task Page
           </Link>
           <Link
-            href="/"
+            href="/About"
             className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
           >
             About
           </Link>
           <Link
-            href="/"
+            href="/Contact"
             className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
           >
             Contact
@@ -44,7 +48,7 @@ export default function NavBar() {
         </div>
         <button
           className="absolute right-0 top-0"
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={handleClick}
         >
           {collapsed ? <RightArrow /> : <LeftArrow />}
         </button>
