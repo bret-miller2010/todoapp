@@ -11,6 +11,7 @@ export type Todo = {
   complexity: string;
   description: string;
   priority: string;
+  checklist: string[];
   completed: false;
   completed_date?: string;
 };
@@ -20,4 +21,5 @@ export type EventHandlerType =
   | React.ChangeEvent<HTMLSelectElement>
   | React.ChangeEvent<HTMLTextAreaElement>
   | React.ChangeEvent<HTMLInputElement>
-  | React.ChangeEvent<HTMLFormElement>;
+  | React.ChangeEvent<HTMLFormElement>
+  | React.FormEvent<HTMLFormElement>;

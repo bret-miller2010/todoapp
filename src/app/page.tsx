@@ -119,14 +119,14 @@ export default function Home() {
           Snapshot information of current list
         </h1>
         <div className="grid grid-cols-3 place-items-center gap-20 py-16">
-          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white drop-shadow-2xl">
+          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white drop-shadow-2xl space-y-3">
             <p>
               Total Number of <span className="underline">active</span> tasks
             </p>
-            <p>{getActiveTasks()}</p>
+            <p className="text-[30px]">{getActiveTasks()}</p>
           </div>
           <div className="flex h-[250px] w-[300px] flex-col items-center justify-center space-y-5 border-2 border-black bg-white drop-shadow-2xl">
-            <span className="text-[40px] font-black">PRIORITY</span>
+            <span className="text-[30px]">Priority Task</span>
             <div className="text-center text-[20px]">
               {getHighestPriority()}
             </div>

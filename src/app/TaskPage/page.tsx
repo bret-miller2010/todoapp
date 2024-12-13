@@ -49,6 +49,7 @@ const TaskPage = () => {
             >
               Add Todo
             </button>
+            <button onClick={() => console.log(todos)}>Show Todos</button>
           </div>
           <div className="flex w-3/4 items-center justify-around">
             <select
