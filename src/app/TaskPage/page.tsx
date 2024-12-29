@@ -38,6 +38,7 @@ const TaskPage = () => {
     } else if (filterCompleted === "incomplete" && todo.completed === false) {
       return true;
     }
+    return false;
   };
 
   const closeMenu = () => {
