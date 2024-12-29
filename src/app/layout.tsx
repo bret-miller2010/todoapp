@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <ToDoProvider>
         <body
-          className={`bg-white flex ${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`flex h-screen w-screen flex-col bg-gray-500 ${geistSans.variable} ${geistMono.variable} antialiased`}
         >
           <NavBar />
           {children}
