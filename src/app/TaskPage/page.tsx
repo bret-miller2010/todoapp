@@ -8,6 +8,7 @@ import { TodoBox } from "../components/TodoBox";
 const TaskPage = () => {
   const { todos } = useTodo();
   const [filteredValue, setFilteredValue] = useState("");
+  const [filterCompleted, setFilterCompleted] = useState("all");
   const [displayAddForm, setDisplayAddForm] = useState(false);
   const [taskID, setTaskID] = useState<string>();
 
@@ -21,8 +22,22 @@ const TaskPage = () => {
     setDisplayAddForm(!displayAddForm);
   };
 
+  const handleFilterCompleted = (value: string) => {
+    setFilterCompleted(value);
+  };
+
   const handleFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFilteredValue(event.target.value);
+  };
+
+  const checkIfIncluded = (todo: Todo) => {
+    if (filterCompleted === "all") {
+      return true;
+    } else if (filterCompleted === "completed" && todo.completed) {
+      return true;
+    } else if (filterCompleted === "incomplete" && todo.completed === false) {
+      return true;
+    }
   };
 
   const closeMenu = () => {
@@ -32,10 +47,10 @@ const TaskPage = () => {
 
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gray-500">
-      <div className="flex h-[1000px] w-[1400px] space-x-10 rounded-xl border-2 border-black bg-gray-200 p-10 shadow-xl shadow-gray-500/50">
-        <div className="flex h-full flex-col items-center space-y-10 rounded-xl border-2 border-black bg-white p-5 py-2 shadow-xl shadow-gray-500/50">
+      <div className="flex items-center space-x-10">
+        <div className="flex h-[400px] flex-col items-center space-y-10 rounded-xl border-2 border-black bg-white px-5 py-10 shadow-xl shadow-gray-500/50">
           <input
-            className="border-2 border-black pl-2"
+            className="rounded-xl border-2 border-black pl-2 duration-300 hover:scale-105"
             placeholder="Search tasks..."
             type="text"
             value={filteredValue}
@@ -45,28 +60,36 @@ const TaskPage = () => {
             <button
               onClick={showAddForm}
               value="add"
-              className="w-28 rounded-xl border-2 border-black"
+              className="w-28 rounded-xl border-2 border-black duration-300 hover:scale-125"
             >
               Add Todo
             </button>
-            <button onClick={() => console.log(todos)}>Show Todos</button>
           </div>
           <div className="flex w-3/4 items-center justify-around">
             <select
-              className="w-28 rounded-xl border-2 border-black"
+              defaultValue="all"
+              className="w-28 rounded-xl border-2 border-black text-center"
+              onChange={(event) => handleFilterCompleted(event.target.value)}
               name=""
               id=""
-            ></select>
+            >
+              <option value="all">All</option>
+              <option value="completed">Completed</option>
+              <option value="incomplete">Incomplete</option>
+            </select>
           </div>
           <AddForm closeMenu={closeMenu} display={displayAddForm} id={taskID} />
         </div>
-        <div className="h-full w-full flex-col items-center">
-          <div className="grid h-full w-full grid-cols-3 place-content-start gap-x-5 gap-y-10">
-            {todos
-              .filter((todo: Todo) => todo.task.includes(filteredValue))
-              .map((todo: Todo, index: number) => (
-                <TodoBox key={index} todo={todo} edit={editTask} />
-              ))}
+        <div className="flex h-[800px] w-[1200px] rounded-xl border-2 border-black bg-gray-200 shadow-xl shadow-gray-500/50">
+          <div className="h-full w-full flex-col items-center">
+            <div className="grid h-full w-full grid-cols-3 place-content-start gap-x-10 gap-y-10 px-20 py-20">
+              {todos
+                .filter((todo: Todo) => todo.task.includes(filteredValue))
+                .filter((todo: Todo) => checkIfIncluded(todo))
+                .map((todo: Todo, index: number) => (
+                  <TodoBox key={index} todo={todo} edit={editTask} />
+                ))}
+            </div>
           </div>
         </div>
       </div>

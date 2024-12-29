@@ -87,7 +87,7 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
   if (!display) return null;
 
   return (
-    <div className="fixed right-[850px] z-20 flex flex-col items-center justify-center space-y-5 rounded-2xl border-2 border-black bg-gray-500 px-12 py-16">
+    <div className="fixed right-[1050px] top-[300px] z-20 flex flex-col items-center justify-center space-y-5 rounded-2xl border-2 border-black bg-gray-500 px-12 py-16">
       <input
         onChange={updateCurrentTodo}
         className="rounded-md border-2 border-black pl-2"
