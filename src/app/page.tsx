@@ -113,12 +113,9 @@ export default function Home() {
   };
 
   return (
-    <div className="flex h-screen w-screen items-center justify-center bg-gray-500">
-      <div className="h-[1000px] w-[1400px] space-y-10 rounded-xl border-2 border-black bg-gray-200 p-5 shadow-xl shadow-gray-500/50">
-        <h1 className="mt-10 w-full text-center text-3xl">
-          Snapshot information of current list
-        </h1>
-        <div className="grid grid-cols-3 place-items-center gap-20 py-16">
+    <div className="flex items-center justify-center bg-gray-500">
+      <div className="rounded-xl border-2 border-black bg-gray-200 shadow-xl shadow-gray-500/50">
+        <div className="grid grid-cols-3 place-items-center gap-20 p-10">
           <div className="flex h-[250px] w-[300px] flex-col items-center justify-center space-y-3 border-2 border-black bg-white drop-shadow-2xl">
             <p>
               Total Number of <span className="underline">active</span> tasks

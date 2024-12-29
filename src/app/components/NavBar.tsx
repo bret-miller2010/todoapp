@@ -1,57 +1,29 @@
 "use client";
 import React from "react";
-import { useState } from "react";
-import { LeftArrow, RightArrow } from "../icons/svg.jsx";
 import Link from "next/link";
 
 export default function NavBar() {
-  const [collapsed, setCollapsed] = useState(false);
-
-  const handleClick = () => {
-    setCollapsed(!collapsed);
-  }
-
-  const hideDisplay = (value: boolean) => {
-    return value ? "-left-[282px]" : "left-0";
-  };
   return (
-    <div className="fixed text-white">
-      <div
-        className={`relative flex h-screen w-80 pt-10 duration-300 ${hideDisplay(collapsed)} flex-col items-center space-y-10 border-2 border-black bg-gray-200`}
-      >
-        <div className="flex flex-col space-y-16">
-          <h1 className="w-full text-center text-3xl text-black">Todo App</h1>
-          <Link
-            href="/"
-            className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
-          >
-            Home
-          </Link>
-          <Link
-            href="/TaskPage"
-            className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
-          >
-            Task Page
-          </Link>
-          <Link
-            href="/About"
-            className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
-          >
-            About
-          </Link>
-          <Link
-            href="/Contact"
-            className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
-          >
-            Contact
-          </Link>
-        </div>
-        <button
-          className="absolute right-0 top-0"
-          onClick={handleClick}
+    <div className="flex justify-center text-white my-10">
+      <div className="flex h-40 items-center rounded-md justify-center space-x-20 border-2 border-black bg-gray-200 px-10">
+        <Link
+          href="/"
+          className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
         >
-          {collapsed ? <RightArrow /> : <LeftArrow />}
-        </button>
+          Home
+        </Link>
+        <Link
+          href="/TaskPage"
+          className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
+        >
+          Task Page
+        </Link>
+        <Link
+          href="/Contact"
+          className="flex h-10 w-40 items-center justify-center rounded-xl border-2 bg-gray-500 duration-300 hover:scale-125 hover:rounded-md"
+        >
+          Contact
+        </Link>
       </div>
     </div>
   );
