@@ -46,6 +46,7 @@ const AddForm = ({ display, closeMenu, id }: AddFormProps) => {
     if (!checkForRepeat(id)) {
       addTodo({ ...newTodo, id: uid(), completed: false });
     }
+   // addToDataBase();
     handleClose();
   };
 

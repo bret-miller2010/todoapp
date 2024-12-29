@@ -119,7 +119,7 @@ export default function Home() {
           Snapshot information of current list
         </h1>
         <div className="grid grid-cols-3 place-items-center gap-20 py-16">
-          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center border-2 border-black bg-white drop-shadow-2xl space-y-3">
+          <div className="flex h-[250px] w-[300px] flex-col items-center justify-center space-y-3 border-2 border-black bg-white drop-shadow-2xl">
             <p>
               Total Number of <span className="underline">active</span> tasks
             </p>
